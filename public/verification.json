@@ -1,0 +1,106 @@
+{
+  "summary": "Outreach Sequencer is published as ryde-play/outreach-sequencer@0.1.0 with durable engagement-state routing, data-store append evidence, hosted registry install, harness, dogfood, and verification artifacts.",
+  "schema": "frantic.outreach_sequencer.evidence.v1",
+  "package": {
+    "name": "outreach-sequencer",
+    "version": "0.1.0",
+    "registry_ref": "ryde-play/outreach-sequencer@0.1.0",
+    "public_url": "https://runx.ai/x/ryde-play/outreach-sequencer@0.1.0"
+  },
+  "source": {
+    "pr_url": "https://github.com/runxhq/runx/pull/169",
+    "source_url": "https://github.com/RYDE-PLAY/runx/tree/b315b74f03dc2e8dcfe962db74db7cef5d72a4bc/skills/outreach-sequencer",
+    "x_yaml": "https://raw.githubusercontent.com/RYDE-PLAY/runx/b315b74f03dc2e8dcfe962db74db7cef5d72a4bc/skills/outreach-sequencer/X.yaml",
+    "skill_md": "https://raw.githubusercontent.com/RYDE-PLAY/runx/b315b74f03dc2e8dcfe962db74db7cef5d72a4bc/skills/outreach-sequencer/SKILL.md",
+    "commit": "b315b74f03dc2e8dcfe962db74db7cef5d72a4bc"
+  },
+  "harness": {
+    "status": "passed",
+    "case_count": 3,
+    "case_names": [
+      "happy_next_touch",
+      "stop_replied",
+      "stop_missing_sequence_definition"
+    ],
+    "assertion_error_count": 0
+  },
+  "dogfood": {
+    "package": "ryde-play/outreach-sequencer@0.1.0",
+    "input": "fixtures/happy-next-touch.json",
+    "command": "runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai",
+    "status": "sealed",
+    "receipt_id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+    "receipt_ref": "runx:receipt:sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+    "decision": {
+      "current_touch_index": 2,
+      "eligible": true,
+      "next_touch_index": 2,
+      "reason": "next_touch"
+    },
+    "engagement_read": {
+      "events": [
+        {
+          "at": "2026-06-20T10:00:00Z",
+          "operation_result": {
+            "event_id": "evt_sent_1",
+            "version": 3
+          },
+          "touch_index": 1,
+          "type": "sent"
+        }
+      ],
+      "version": 4
+    },
+    "append_event": {
+      "after_version": 5,
+      "aggregate_id": "seq-demo-001:contact-acme",
+      "before_version": 4,
+      "event_type": "outreach.next_touch_selected",
+      "expected_version": 4,
+      "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+    },
+    "next_touch_packet": {
+      "audience": {
+        "contact_ref": "contact:acme:buyer"
+      },
+      "channel": "email",
+      "content_digest": "sha256:touch-2",
+      "dispatch_by_naming": "send-as",
+      "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
+      "packet_type": "runx.outreach.next_touch.v1",
+      "principal": "account:outreach-bot",
+      "send_class": "outreach",
+      "touch_index": 2
+    },
+    "harness_cases": [
+      "happy_next_touch",
+      "stop_replied",
+      "stop_missing_sequence_definition"
+    ]
+  },
+  "verification": {
+    "valid": false,
+    "digest": {
+      "status": "valid",
+      "expected": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87",
+      "actual": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87"
+    },
+    "content_address": {
+      "status": "valid",
+      "expected": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+      "actual": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8"
+    },
+    "signature": {
+      "mode": "local-development",
+      "status": "invalid",
+      "kid": "runx-demo-key"
+    },
+    "findings": [
+      {
+        "code": "signature_malformed",
+        "path": "signature.value",
+        "message": "signature value is malformed"
+      }
+    ]
+  }
+}

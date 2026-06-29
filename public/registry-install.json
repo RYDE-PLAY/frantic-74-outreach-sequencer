@@ -1,0 +1,43 @@
+{
+  "status": "success",
+  "registry": {
+    "action": "install",
+    "source": "remote",
+    "ref": "ryde-play/outreach-sequencer@0.1.0",
+    "install": {
+      "status": "installed",
+      "destination": "/tmp/outreach74/install-test/ryde-play/outreach-sequencer/0.1.0/SKILL.md",
+      "skill_name": "outreach-sequencer",
+      "source": "runx-registry",
+      "source_label": "runx registry",
+      "skill_id": "ryde-play/outreach-sequencer",
+      "version": "0.1.0",
+      "digest": "sha256:0d9095b508a34f10a9c160140c831c5e0696c3e143b6fadcd9de700f13943405",
+      "profile_digest": "sha256:833d9112570b11d5976c7a16e0f903b70d2a87f8b87f8f44b4f3c1cbab938c9d",
+      "profile_state_path": "/tmp/outreach74/install-test/ryde-play/outreach-sequencer/0.1.0/.runx/profile.json",
+      "runner_names": [
+        "sequence"
+      ],
+      "trust_tier": "community"
+    },
+    "receipt_metadata": {
+      "destination": "/tmp/outreach74/install-test/ryde-play/outreach-sequencer/0.1.0/SKILL.md",
+      "digest": "sha256:0d9095b508a34f10a9c160140c831c5e0696c3e143b6fadcd9de700f13943405",
+      "install_count": 1,
+      "package_digest": "25536f087e026e5271a183a2149d083f7a1288cdee8a3785e5e1f5f9f697c2e6",
+      "profile_digest": "sha256:833d9112570b11d5976c7a16e0f903b70d2a87f8b87f8f44b4f3c1cbab938c9d",
+      "publisher": {
+        "display_name": "RYDE",
+        "handle": "ryde-play",
+        "id": "user_0e65bd23969ab1dea100a77c",
+        "kind": "user"
+      },
+      "ref": "ryde-play/outreach-sequencer@0.1.0",
+      "skill_id": "ryde-play/outreach-sequencer",
+      "source_label": "runx registry",
+      "status": "installed",
+      "trust_tier": "community",
+      "version": "0.1.0"
+    }
+  }
+}

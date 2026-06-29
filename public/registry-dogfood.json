@@ -1,0 +1,347 @@
+{
+  "closure": {
+    "closed_at": "2026-06-29T04:32:04.333Z",
+    "disposition": "closed",
+    "reason_code": "process_closed",
+    "summary": "cli-tool sequence completed"
+  },
+  "execution": {
+    "exit_code": 0,
+    "skill_claim": {
+      "data": {
+        "outreach_decision": {
+          "append_event": {
+            "attempted": true,
+            "operation": "append_event",
+            "operation_result": {
+              "after_version": 5,
+              "aggregate_id": "seq-demo-001:contact-acme",
+              "before_version": 4,
+              "event_type": "outreach.next_touch_selected",
+              "expected_version": 4,
+              "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+            }
+          },
+          "decision": {
+            "current_touch_index": 2,
+            "eligible": true,
+            "next_touch_index": 2,
+            "reason": "next_touch"
+          },
+          "engagement_read": {
+            "aggregate_id": "seq-demo-001:contact-acme",
+            "operation": "read_projection",
+            "operation_result": {
+              "events": [
+                {
+                  "at": "2026-06-20T10:00:00Z",
+                  "operation_result": {
+                    "event_id": "evt_sent_1",
+                    "version": 3
+                  },
+                  "touch_index": 1,
+                  "type": "sent"
+                }
+              ],
+              "version": 4
+            },
+            "store_id": "runx-outreach-state"
+          },
+          "escalation": {
+            "lane": "none",
+            "reason": "handoff-only packet emitted; downstream send-as run required"
+          },
+          "next_touch_packet": {
+            "audience": {
+              "contact_ref": "contact:acme:buyer"
+            },
+            "channel": "email",
+            "content_digest": "sha256:touch-2",
+            "dispatch_by_naming": "send-as",
+            "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
+            "packet_type": "runx.outreach.next_touch.v1",
+            "principal": "account:outreach-bot",
+            "send_class": "outreach",
+            "touch_index": 2
+          }
+        }
+      },
+      "schema": "runx.outreach.sequencer.v1"
+    },
+    "stderr": "",
+    "stdout": "{\n  \"schema\": \"runx.outreach.sequencer.v1\",\n  \"data\": {\n    \"outreach_decision\": {\n      \"decision\": {\n        \"eligible\": true,\n        \"reason\": \"next_touch\",\n        \"current_touch_index\": 2,\n        \"next_touch_index\": 2\n      },\n      \"engagement_read\": {\n        \"store_id\": \"runx-outreach-state\",\n        \"aggregate_id\": \"seq-demo-001:contact-acme\",\n        \"operation\": \"read_projection\",\n        \"operation_result\": {\n          \"version\": 4,\n          \"events\": [\n            {\n              \"type\": \"sent\",\n              \"at\": \"2026-06-20T10:00:00Z\",\n              \"touch_index\": 1,\n              \"operation_result\": {\n                \"event_id\": \"evt_sent_1\",\n                \"version\": 3\n              }\n            }\n          ]\n        }\n      },\n      \"append_event\": {\n        \"attempted\": true,\n        \"operation\": \"append_event\",\n        \"operation_result\": {\n          \"event_type\": \"outreach.next_touch_selected\",\n          \"before_version\": 4,\n          \"after_version\": 5,\n          \"idempotency_key\": \"outreach:seq-demo-001:contact-acme:touch-2\",\n          \"expected_version\": 4,\n          \"aggregate_id\": \"seq-demo-001:contact-acme\"\n        }\n      },\n      \"next_touch_packet\": {\n        \"packet_type\": \"runx.outreach.next_touch.v1\",\n        \"send_class\": \"outreach\",\n        \"principal\": \"account:outreach-bot\",\n        \"channel\": \"email\",\n        \"audience\": {\n          \"contact_ref\": \"contact:acme:buyer\"\n        },\n        \"content_digest\": \"sha256:touch-2\",\n        \"dispatch_idempotency_key\": \"outreach:seq-demo-001:contact-acme:touch-2:send-as\",\n        \"touch_index\": 2,\n        \"dispatch_by_naming\": \"send-as\"\n      },\n      \"escalation\": {\n        \"lane\": \"none\",\n        \"reason\": \"handoff-only packet emitted; downstream send-as run required\"\n      }\n    }\n  }\n}\n",
+    "structured_output": {
+      "data": {
+        "outreach_decision": {
+          "append_event": {
+            "attempted": true,
+            "operation": "append_event",
+            "operation_result": {
+              "after_version": 5,
+              "aggregate_id": "seq-demo-001:contact-acme",
+              "before_version": 4,
+              "event_type": "outreach.next_touch_selected",
+              "expected_version": 4,
+              "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+            }
+          },
+          "decision": {
+            "current_touch_index": 2,
+            "eligible": true,
+            "next_touch_index": 2,
+            "reason": "next_touch"
+          },
+          "engagement_read": {
+            "aggregate_id": "seq-demo-001:contact-acme",
+            "operation": "read_projection",
+            "operation_result": {
+              "events": [
+                {
+                  "at": "2026-06-20T10:00:00Z",
+                  "operation_result": {
+                    "event_id": "evt_sent_1",
+                    "version": 3
+                  },
+                  "touch_index": 1,
+                  "type": "sent"
+                }
+              ],
+              "version": 4
+            },
+            "store_id": "runx-outreach-state"
+          },
+          "escalation": {
+            "lane": "none",
+            "reason": "handoff-only packet emitted; downstream send-as run required"
+          },
+          "next_touch_packet": {
+            "audience": {
+              "contact_ref": "contact:acme:buyer"
+            },
+            "channel": "email",
+            "content_digest": "sha256:touch-2",
+            "dispatch_by_naming": "send-as",
+            "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
+            "packet_type": "runx.outreach.next_touch.v1",
+            "principal": "account:outreach-bot",
+            "send_class": "outreach",
+            "touch_index": 2
+          }
+        }
+      },
+      "schema": "runx.outreach.sequencer.v1"
+    }
+  },
+  "payload": {
+    "data": {
+      "outreach_decision": {
+        "append_event": {
+          "attempted": true,
+          "operation": "append_event",
+          "operation_result": {
+            "after_version": 5,
+            "aggregate_id": "seq-demo-001:contact-acme",
+            "before_version": 4,
+            "event_type": "outreach.next_touch_selected",
+            "expected_version": 4,
+            "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+          }
+        },
+        "decision": {
+          "current_touch_index": 2,
+          "eligible": true,
+          "next_touch_index": 2,
+          "reason": "next_touch"
+        },
+        "engagement_read": {
+          "aggregate_id": "seq-demo-001:contact-acme",
+          "operation": "read_projection",
+          "operation_result": {
+            "events": [
+              {
+                "at": "2026-06-20T10:00:00Z",
+                "operation_result": {
+                  "event_id": "evt_sent_1",
+                  "version": 3
+                },
+                "touch_index": 1,
+                "type": "sent"
+              }
+            ],
+            "version": 4
+          },
+          "store_id": "runx-outreach-state"
+        },
+        "escalation": {
+          "lane": "none",
+          "reason": "handoff-only packet emitted; downstream send-as run required"
+        },
+        "next_touch_packet": {
+          "audience": {
+            "contact_ref": "contact:acme:buyer"
+          },
+          "channel": "email",
+          "content_digest": "sha256:touch-2",
+          "dispatch_by_naming": "send-as",
+          "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
+          "packet_type": "runx.outreach.next_touch.v1",
+          "principal": "account:outreach-bot",
+          "send_class": "outreach",
+          "touch_index": 2
+        }
+      }
+    },
+    "schema": "runx.outreach.sequencer.v1"
+  },
+  "receipt": {
+    "acts": [
+      {
+        "artifact_refs": [],
+        "closure": {
+          "closed_at": "2026-06-29T04:32:04.333Z",
+          "disposition": "closed",
+          "reason_code": "process_exit",
+          "summary": "cli-tool exited successfully"
+        },
+        "criterion_bindings": [
+          {
+            "criterion_id": "process_exit",
+            "evidence_refs": [],
+            "status": "verified",
+            "summary": "cli-tool exited successfully",
+            "verification_refs": []
+          }
+        ],
+        "form": "observation",
+        "id": "act_sequence",
+        "intent": {
+          "constraints": [],
+          "derived_from": [],
+          "legitimacy": "Runtime graph execution was admitted by the local harness",
+          "purpose": "Run graph step sequence",
+          "success_criteria": [
+            {
+              "criterion_id": "process_exit",
+              "required": true,
+              "statement": "cli-tool exits successfully"
+            }
+          ]
+        },
+        "source_refs": [],
+        "summary": "Executed graph step sequence",
+        "target_refs": []
+      }
+    ],
+    "authority": {
+      "actor_ref": {
+        "type": "principal",
+        "uri": "runx:principal:local_runtime"
+      },
+      "attenuation": {
+        "parent_authority_ref": null,
+        "subset_proof": null
+      },
+      "authority_proof_refs": [],
+      "enforcement": {
+        "profile_hash": "sha256:635fdb0a7eef93911e3c6bd0b25b5e635edba32e0259133042b3a5f1fb19394e",
+        "redaction_refs": [],
+        "setup_refs": [],
+        "teardown_refs": []
+      },
+      "grant_refs": [],
+      "scope_refs": [],
+      "terms": []
+    },
+    "canonicalization": "runx.receipt.c14n.v1",
+    "created_at": "2026-06-29T04:32:04.333Z",
+    "decisions": [
+      {
+        "artifact_refs": [],
+        "choice": "open",
+        "closure": null,
+        "decision_id": "dec_sequence",
+        "inputs": {
+          "opportunity_refs": [],
+          "selection_ref": null,
+          "signal_refs": [],
+          "target_ref": null
+        },
+        "justification": {
+          "evidence_refs": [],
+          "summary": "runtime graph planner selected this node"
+        },
+        "proposed_intent": {
+          "constraints": [],
+          "derived_from": [],
+          "legitimacy": "Local graph execution requested this node",
+          "purpose": "Open runtime node sequence",
+          "success_criteria": []
+        },
+        "selected_act_id": "act_sequence",
+        "selected_harness_ref": null
+      }
+    ],
+    "digest": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87",
+    "id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+    "idempotency": {
+      "content_hash": "sha256:run_sequence_07365d38a87e-sequence-content",
+      "intent_key": "sha256:run_sequence_07365d38a87e-sequence-intent",
+      "trigger_fingerprint": "sha256:run_sequence_07365d38a87e-sequence-trigger"
+    },
+    "issuer": {
+      "kid": "runx-demo-key",
+      "public_key_sha256": "sha256:3097e2dee2cb4a34b53840cdb705aed71067c36f68db0e0f559c3f3fa043315f",
+      "type": "hosted"
+    },
+    "lineage": {
+      "children": [],
+      "sync": []
+    },
+    "schema": "runx.receipt.v1",
+    "seal": {
+      "closed_at": "2026-06-29T04:32:04.333Z",
+      "criteria": [
+        {
+          "criterion_id": "process_exit",
+          "evidence_refs": [],
+          "status": "verified",
+          "summary": "cli-tool exited successfully",
+          "verification_refs": []
+        }
+      ],
+      "disposition": "closed",
+      "last_observed_at": "2026-06-29T04:32:04.333Z",
+      "reason_code": "process_closed",
+      "summary": "cli-tool sequence completed"
+    },
+    "signals": [],
+    "signature": {
+      "alg": "Ed25519",
+      "value": "base64:kSBNVTFdRGDGnLjL3EuUHviX-6spVc_XKtxF4-FutzhjQw6aOEMFBICPRSRwHHzpQoQu5B4Muygtre4spB1ADw"
+    },
+    "subject": {
+      "commitments": [],
+      "kind": "skill",
+      "ref": {
+        "type": "harness",
+        "uri": "hrn_run_sequence_07365d38a87e_sequence"
+      }
+    }
+  },
+  "receipt_id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+  "registry_provenance": {
+    "digest": "sha256:0d9095b508a34f10a9c160140c831c5e0696c3e143b6fadcd9de700f13943405",
+    "profile_digest": "sha256:833d9112570b11d5976c7a16e0f903b70d2a87f8b87f8f44b4f3c1cbab938c9d",
+    "registry_key_id": "runx-registry-ed25519-v1",
+    "registry_source": "remote https://api.runx.ai",
+    "registry_source_fingerprint": "ba1ac16b631195fd",
+    "skill_id": "ryde-play/outreach-sequencer",
+    "trust_state": "trusted",
+    "trust_tier": "community",
+    "version": "0.1.0"
+  },
+  "run_id": "run_sequence_07365d38a87e",
+  "schema": "runx.skill_run.v1",
+  "skill_name": "outreach-sequencer",
+  "status": "sealed"
+}

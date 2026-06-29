@@ -1,0 +1,50 @@
+{
+  "status": "success",
+  "registry": {
+    "action": "read",
+    "source": "remote",
+    "ref": "ryde-play/outreach-sequencer@0.1.0",
+    "skill": {
+      "skill_id": "ryde-play/outreach-sequencer",
+      "owner": "ryde-play",
+      "name": "outreach-sequencer",
+      "description": "Decide the next outreach touch from durable engagement state, append the decision event, and emit a handoff-only next-touch packet without sending.",
+      "category": "ops",
+      "version": "0.1.0",
+      "digest": "0d9095b508a34f10a9c160140c831c5e0696c3e143b6fadcd9de700f13943405",
+      "markdown": "---\nname: outreach-sequencer\ndescription: Decide the next outreach touch from durable engagement state, append the decision event, and emit a handoff-only next-touch packet without sending.\nrunx:\n  category: ops\n---\n\n# Outreach Sequencer\n\nOutreach Sequencer decides whether one contact in one sequence should receive\nthe next touch. It reads the sequence definition and the contact's engagement\nprojection, stops immediately after a reply or unsubscribe, enforces\n`min_days_apart`, appends one decision event through the data-store operation\nshape, and emits a typed `runx.outreach.next_touch.v1` packet only when the next\ntouch is eligible.\n\nThis skill never sends. The packet names the downstream `send-as` run that a\ndriver or operator may issue under its own approval and preflight. Sequence\nprogress is durable state; egress is a separate governed consequence.\n\n## What This Skill Does\n\n1. **Validate sequence state.** Refuse to guess when the sequence definition,\n   touch list, contact ref, aggregate id, idempotency key, or expected version\n   is missing.\n2. **Read durable engagement evidence.** Treat `prior_projection` as the\n   data-store `read_projection` result for the sequence/contact aggregate. Every\n   reply, unsubscribe, bounce, and prior sent touch used in a decision is\n   recorded in the output as an `operation_result`.\n3. **Stop on reply or unsubscribe.** If the engagement stream contains a reply\n   or unsubscribe, seal with `decision.eligible: false`, reason `replied` or\n   `unsubscribed`, no next-touch packet, and no append event.\n4. **Enforce spacing.** If the prior sent touch is more recent than\n   `rules.min_days_apart`, seal with `decision.eligible: false`,\n   reason `too_soon`, no next-touch packet, and no append event.\n5. **Append eligible decisions.** When eligible, append one\n   `outreach.next_touch_selected` event via\n   `append_event(idempotency_key, expected_version)` against\n   `registry:runx/data-store@0.1.2` with the pinned `store_id` and\n   `aggregate_id`.\n6. **Emit a handoff packet.** The `runx.outreach.next_touch.v1` packet binds\n   send class `outreach`, principal, channel, audience, content digest, touch\n   index, and dispatch idempotency key. It is data only.\n\n## Contract Boundaries\n\n- **Inputs are typed.**\n  - `sequence_definition`: `touches` and `rules`.\n  - `aggregate_id`: sequence/contact entity key for state.\n  - `contact_ref`: stable contact reference and audience binding.\n  - `current_touch_index`: optional current index; defaults to the first\n    unsent touch after prior projection.\n  - `store_id`: pinned data-store id.\n  - `idempotency_key`: append idempotency key.\n  - `expected_version`: expected projection version.\n- **State is data-store shaped.** The sequence is\n  `read_projection -> decide -> append_event(idempotency_key, expected_version)`.\n  The skill records operation-result evidence but does not depend on private\n  data-store credentials.\n- **Output is typed.** The artifact is `outreach_decision`, containing\n  `decision`, `engagement_read`, optional `append_event`, optional\n  `next_touch_packet`, and `escalation`.\n- **No authority minting.** The skill does not mint authority, produce an\n  operational proposal envelope, or call a provider.\n\n## Refusals And Stops\n\n- Missing sequence definition, empty touches, missing contact ref, missing\n  aggregate id, missing idempotency key, or unreadable engagement state returns\n  `decision.eligible: false` with reason `needs_human` or `needs_input` and no\n  append.\n- Reply and unsubscribe always stop the sequence and emit no packet.\n- A prior touch inside `min_days_apart` stops with reason `too_soon`.\n- A contact beyond the end of the sequence stops with reason\n  `sequence_complete`.\n- A bounce may advance the sequence only if the sequence policy declares\n  `advance_on_bounce: true`; otherwise it stops with reason `bounced`.\n\n## Quality Profile\n\n- Purpose: decide one next outreach touch from durable engagement state.\n- Audience: outreach operators, compliance reviewers, and downstream send\n  drivers.\n- Artifact contract: eligibility verdict, engagement operation-result evidence,\n  data-store append operation-result, next touch packet, and stop reason.\n- Evidence bar: every positive decision cites the engagement stream read, prior\n  touch spacing, selected touch, append version movement, and dispatch key.\n- Safety bar: no sends, no authority minting, and fail-closed stops after reply\n  or unsubscribe.\n- Stop conditions: missing state, reply, unsubscribe, too soon, bounce when\n  bounce advancement is disallowed, or sequence complete.\n\n## Output Schema\n\n```yaml\noutreach_decision:\n  decision:\n    eligible: boolean\n    reason: next_touch | replied | unsubscribed | too_soon | bounced | sequence_complete | needs_human | needs_input\n    current_touch_index: number\n    next_touch_index: number | null\n  engagement_read:\n    store_id: string\n    aggregate_id: string\n    operation: read_projection\n    operation_result:\n      version: number\n      events:\n        - type: reply | unsubscribe | bounce | sent | decision\n          at: string\n          touch_index: number | null\n  append_event:\n    attempted: boolean\n    operation_result:\n      event_type: outreach.next_touch_selected | null\n      before_version: number\n      after_version: number | null\n      idempotency_key: string\n      expected_version: number\n  next_touch_packet:\n    packet_type: runx.outreach.next_touch.v1\n    send_class: outreach\n    principal: string\n    channel: string\n    audience:\n      contact_ref: string\n    content_digest: string\n    dispatch_idempotency_key: string\n    touch_index: number\n  escalation:\n    lane: human-approval | none\n    reason: string\n```\n\n## Inputs\n\n- `sequence_definition` (required): `touches` and `rules`.\n- `aggregate_id` (required): sequence/contact aggregate id.\n- `contact_ref` (required): stable contact reference.\n- `current_touch_index` (optional): explicit next touch index.\n- `store_id` (required): pinned data-store id.\n- `idempotency_key` (required): append idempotency key.\n- `expected_version` (required): expected read projection version.\n- `prior_projection` (optional): data-store read projection, including version\n  and engagement events.",
+      "profile_digest": "833d9112570b11d5976c7a16e0f903b70d2a87f8b87f8f44b4f3c1cbab938c9d",
+      "runner_names": [
+        "sequence"
+      ],
+      "source_type": "agent",
+      "trust_tier": "community",
+      "required_scopes": [],
+      "tags": [],
+      "publisher": {
+        "kind": "user",
+        "id": "user_0e65bd23969ab1dea100a77c",
+        "handle": "ryde-play",
+        "display_name": "RYDE"
+      },
+      "attestations": [
+        {
+          "kind": "publisher",
+          "id": "publisher:user_0e65bd23969ab1dea100a77c",
+          "status": "declared",
+          "summary": "RYDE",
+          "issued_at": "2026-06-29T04:31:01.650Z",
+          "metadata": {
+            "publisher_display_name": "RYDE",
+            "publisher_handle": "ryde-play",
+            "publisher_id": "user_0e65bd23969ab1dea100a77c",
+            "publisher_kind": "user",
+            "trust_tier": "community"
+          }
+        }
+      ],
+      "install_command": "runx add ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai",
+      "run_command": "runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai"
+    }
+  }
+}
