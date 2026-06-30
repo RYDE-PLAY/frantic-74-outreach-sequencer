@@ -1,132 +1,90 @@
 {
   "closure": {
-    "closed_at": "2026-06-29T04:32:04.333Z",
-    "disposition": "closed",
-    "reason_code": "process_closed",
+    "closed_at": "2026-06-30T05:49:08.134Z",
+    "disposition": "failed",
+    "reason_code": "process_failed",
     "summary": "cli-tool sequence completed"
   },
   "execution": {
-    "exit_code": 0,
+    "exit_code": 2,
     "skill_claim": {
       "data": {
         "outreach_decision": {
           "append_event": {
-            "attempted": true,
+            "attempted": false,
             "operation": "append_event",
             "operation_result": {
-              "after_version": 5,
-              "aggregate_id": "seq-demo-001:contact-acme",
-              "before_version": 4,
-              "event_type": "outreach.next_touch_selected",
-              "expected_version": 4,
-              "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+              "after_version": null,
+              "aggregate_id": "",
+              "before_version": 0,
+              "event_type": null,
+              "expected_version": 0,
+              "idempotency_key": ""
             }
           },
           "decision": {
-            "current_touch_index": 2,
-            "eligible": true,
-            "next_touch_index": 2,
-            "reason": "next_touch"
+            "current_touch_index": 1,
+            "eligible": false,
+            "next_touch_index": null,
+            "reason": "needs_input"
           },
           "engagement_read": {
-            "aggregate_id": "seq-demo-001:contact-acme",
+            "aggregate_id": "",
             "operation": "read_projection",
             "operation_result": {
-              "events": [
-                {
-                  "at": "2026-06-20T10:00:00Z",
-                  "operation_result": {
-                    "event_id": "evt_sent_1",
-                    "version": 3
-                  },
-                  "touch_index": 1,
-                  "type": "sent"
-                }
-              ],
-              "version": 4
+              "events": [],
+              "version": 0
             },
-            "store_id": "runx-outreach-state"
+            "store_id": ""
           },
           "escalation": {
-            "lane": "none",
-            "reason": "handoff-only packet emitted; downstream send-as run required"
+            "lane": "human-approval",
+            "reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
           },
-          "next_touch_packet": {
-            "audience": {
-              "contact_ref": "contact:acme:buyer"
-            },
-            "channel": "email",
-            "content_digest": "sha256:touch-2",
-            "dispatch_by_naming": "send-as",
-            "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
-            "packet_type": "runx.outreach.next_touch.v1",
-            "principal": "account:outreach-bot",
-            "send_class": "outreach",
-            "touch_index": 2
-          }
+          "next_touch_packet": null,
+          "refused_reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
         }
       },
       "schema": "runx.outreach.sequencer.v1"
     },
     "stderr": "",
-    "stdout": "{\n  \"schema\": \"runx.outreach.sequencer.v1\",\n  \"data\": {\n    \"outreach_decision\": {\n      \"decision\": {\n        \"eligible\": true,\n        \"reason\": \"next_touch\",\n        \"current_touch_index\": 2,\n        \"next_touch_index\": 2\n      },\n      \"engagement_read\": {\n        \"store_id\": \"runx-outreach-state\",\n        \"aggregate_id\": \"seq-demo-001:contact-acme\",\n        \"operation\": \"read_projection\",\n        \"operation_result\": {\n          \"version\": 4,\n          \"events\": [\n            {\n              \"type\": \"sent\",\n              \"at\": \"2026-06-20T10:00:00Z\",\n              \"touch_index\": 1,\n              \"operation_result\": {\n                \"event_id\": \"evt_sent_1\",\n                \"version\": 3\n              }\n            }\n          ]\n        }\n      },\n      \"append_event\": {\n        \"attempted\": true,\n        \"operation\": \"append_event\",\n        \"operation_result\": {\n          \"event_type\": \"outreach.next_touch_selected\",\n          \"before_version\": 4,\n          \"after_version\": 5,\n          \"idempotency_key\": \"outreach:seq-demo-001:contact-acme:touch-2\",\n          \"expected_version\": 4,\n          \"aggregate_id\": \"seq-demo-001:contact-acme\"\n        }\n      },\n      \"next_touch_packet\": {\n        \"packet_type\": \"runx.outreach.next_touch.v1\",\n        \"send_class\": \"outreach\",\n        \"principal\": \"account:outreach-bot\",\n        \"channel\": \"email\",\n        \"audience\": {\n          \"contact_ref\": \"contact:acme:buyer\"\n        },\n        \"content_digest\": \"sha256:touch-2\",\n        \"dispatch_idempotency_key\": \"outreach:seq-demo-001:contact-acme:touch-2:send-as\",\n        \"touch_index\": 2,\n        \"dispatch_by_naming\": \"send-as\"\n      },\n      \"escalation\": {\n        \"lane\": \"none\",\n        \"reason\": \"handoff-only packet emitted; downstream send-as run required\"\n      }\n    }\n  }\n}\n",
+    "stdout": "{\n  \"schema\": \"runx.outreach.sequencer.v1\",\n  \"data\": {\n    \"outreach_decision\": {\n      \"decision\": {\n        \"eligible\": false,\n        \"reason\": \"needs_input\",\n        \"current_touch_index\": 1,\n        \"next_touch_index\": null\n      },\n      \"engagement_read\": {\n        \"store_id\": \"\",\n        \"aggregate_id\": \"\",\n        \"operation\": \"read_projection\",\n        \"operation_result\": {\n          \"version\": 0,\n          \"events\": []\n        }\n      },\n      \"append_event\": {\n        \"attempted\": false,\n        \"operation\": \"append_event\",\n        \"operation_result\": {\n          \"event_type\": null,\n          \"before_version\": 0,\n          \"after_version\": null,\n          \"idempotency_key\": \"\",\n          \"expected_version\": 0,\n          \"aggregate_id\": \"\"\n        }\n      },\n      \"next_touch_packet\": null,\n      \"refused_reason\": \"sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required.\",\n      \"escalation\": {\n        \"lane\": \"human-approval\",\n        \"reason\": \"sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required.\"\n      }\n    }\n  }\n}\n",
     "structured_output": {
       "data": {
         "outreach_decision": {
           "append_event": {
-            "attempted": true,
+            "attempted": false,
             "operation": "append_event",
             "operation_result": {
-              "after_version": 5,
-              "aggregate_id": "seq-demo-001:contact-acme",
-              "before_version": 4,
-              "event_type": "outreach.next_touch_selected",
-              "expected_version": 4,
-              "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+              "after_version": null,
+              "aggregate_id": "",
+              "before_version": 0,
+              "event_type": null,
+              "expected_version": 0,
+              "idempotency_key": ""
             }
           },
           "decision": {
-            "current_touch_index": 2,
-            "eligible": true,
-            "next_touch_index": 2,
-            "reason": "next_touch"
+            "current_touch_index": 1,
+            "eligible": false,
+            "next_touch_index": null,
+            "reason": "needs_input"
           },
           "engagement_read": {
-            "aggregate_id": "seq-demo-001:contact-acme",
+            "aggregate_id": "",
             "operation": "read_projection",
             "operation_result": {
-              "events": [
-                {
-                  "at": "2026-06-20T10:00:00Z",
-                  "operation_result": {
-                    "event_id": "evt_sent_1",
-                    "version": 3
-                  },
-                  "touch_index": 1,
-                  "type": "sent"
-                }
-              ],
-              "version": 4
+              "events": [],
+              "version": 0
             },
-            "store_id": "runx-outreach-state"
+            "store_id": ""
           },
           "escalation": {
-            "lane": "none",
-            "reason": "handoff-only packet emitted; downstream send-as run required"
+            "lane": "human-approval",
+            "reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
           },
-          "next_touch_packet": {
-            "audience": {
-              "contact_ref": "contact:acme:buyer"
-            },
-            "channel": "email",
-            "content_digest": "sha256:touch-2",
-            "dispatch_by_naming": "send-as",
-            "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
-            "packet_type": "runx.outreach.next_touch.v1",
-            "principal": "account:outreach-bot",
-            "send_class": "outreach",
-            "touch_index": 2
-          }
+          "next_touch_packet": null,
+          "refused_reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
         }
       },
       "schema": "runx.outreach.sequencer.v1"
@@ -136,59 +94,38 @@
     "data": {
       "outreach_decision": {
         "append_event": {
-          "attempted": true,
+          "attempted": false,
           "operation": "append_event",
           "operation_result": {
-            "after_version": 5,
-            "aggregate_id": "seq-demo-001:contact-acme",
-            "before_version": 4,
-            "event_type": "outreach.next_touch_selected",
-            "expected_version": 4,
-            "idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2"
+            "after_version": null,
+            "aggregate_id": "",
+            "before_version": 0,
+            "event_type": null,
+            "expected_version": 0,
+            "idempotency_key": ""
           }
         },
         "decision": {
-          "current_touch_index": 2,
-          "eligible": true,
-          "next_touch_index": 2,
-          "reason": "next_touch"
+          "current_touch_index": 1,
+          "eligible": false,
+          "next_touch_index": null,
+          "reason": "needs_input"
         },
         "engagement_read": {
-          "aggregate_id": "seq-demo-001:contact-acme",
+          "aggregate_id": "",
           "operation": "read_projection",
           "operation_result": {
-            "events": [
-              {
-                "at": "2026-06-20T10:00:00Z",
-                "operation_result": {
-                  "event_id": "evt_sent_1",
-                  "version": 3
-                },
-                "touch_index": 1,
-                "type": "sent"
-              }
-            ],
-            "version": 4
+            "events": [],
+            "version": 0
           },
-          "store_id": "runx-outreach-state"
+          "store_id": ""
         },
         "escalation": {
-          "lane": "none",
-          "reason": "handoff-only packet emitted; downstream send-as run required"
+          "lane": "human-approval",
+          "reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
         },
-        "next_touch_packet": {
-          "audience": {
-            "contact_ref": "contact:acme:buyer"
-          },
-          "channel": "email",
-          "content_digest": "sha256:touch-2",
-          "dispatch_by_naming": "send-as",
-          "dispatch_idempotency_key": "outreach:seq-demo-001:contact-acme:touch-2:send-as",
-          "packet_type": "runx.outreach.next_touch.v1",
-          "principal": "account:outreach-bot",
-          "send_class": "outreach",
-          "touch_index": 2
-        }
+        "next_touch_packet": null,
+        "refused_reason": "sequence_definition is required. sequence_definition.touches must contain at least one touch. aggregate_id is required. contact_ref is required. store_id is required. idempotency_key is required."
       }
     },
     "schema": "runx.outreach.sequencer.v1"
@@ -198,17 +135,17 @@
       {
         "artifact_refs": [],
         "closure": {
-          "closed_at": "2026-06-29T04:32:04.333Z",
-          "disposition": "closed",
+          "closed_at": "2026-06-30T05:49:08.134Z",
+          "disposition": "failed",
           "reason_code": "process_exit",
-          "summary": "cli-tool exited successfully"
+          "summary": "cli-tool failed with exit code Some(2)"
         },
         "criterion_bindings": [
           {
             "criterion_id": "process_exit",
             "evidence_refs": [],
-            "status": "verified",
-            "summary": "cli-tool exited successfully",
+            "status": "failed",
+            "summary": "cli-tool failed with exit code Some(2)",
             "verification_refs": []
           }
         ],
@@ -253,7 +190,7 @@
       "terms": []
     },
     "canonicalization": "runx.receipt.c14n.v1",
-    "created_at": "2026-06-29T04:32:04.333Z",
+    "created_at": "2026-06-30T05:49:08.134Z",
     "decisions": [
       {
         "artifact_refs": [],
@@ -281,16 +218,16 @@
         "selected_harness_ref": null
       }
     ],
-    "digest": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87",
-    "id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+    "digest": "sha256:daee6afb033d31cd7b57b62b2e46071c19dae3114618e6525aa186ccd52b4a33",
+    "id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
     "idempotency": {
-      "content_hash": "sha256:run_sequence_07365d38a87e-sequence-content",
-      "intent_key": "sha256:run_sequence_07365d38a87e-sequence-intent",
-      "trigger_fingerprint": "sha256:run_sequence_07365d38a87e-sequence-trigger"
+      "content_hash": "sha256:run_sequence_44136fa355b3-sequence-content",
+      "intent_key": "sha256:run_sequence_44136fa355b3-sequence-intent",
+      "trigger_fingerprint": "sha256:run_sequence_44136fa355b3-sequence-trigger"
     },
     "issuer": {
-      "kid": "runx-demo-key",
-      "public_key_sha256": "sha256:3097e2dee2cb4a34b53840cdb705aed71067c36f68db0e0f559c3f3fa043315f",
+      "kid": "outreach-sequencer-repair-20260630",
+      "public_key_sha256": "sha256:e589bfccbd0b32019b99bf87e23b1c45619c51bcae13467c4ca12d8251a51af9",
       "type": "hosted"
     },
     "lineage": {
@@ -299,36 +236,36 @@
     },
     "schema": "runx.receipt.v1",
     "seal": {
-      "closed_at": "2026-06-29T04:32:04.333Z",
+      "closed_at": "2026-06-30T05:49:08.134Z",
       "criteria": [
         {
           "criterion_id": "process_exit",
           "evidence_refs": [],
-          "status": "verified",
-          "summary": "cli-tool exited successfully",
+          "status": "failed",
+          "summary": "cli-tool failed with exit code Some(2)",
           "verification_refs": []
         }
       ],
-      "disposition": "closed",
-      "last_observed_at": "2026-06-29T04:32:04.333Z",
-      "reason_code": "process_closed",
+      "disposition": "failed",
+      "last_observed_at": "2026-06-30T05:49:08.134Z",
+      "reason_code": "process_failed",
       "summary": "cli-tool sequence completed"
     },
     "signals": [],
     "signature": {
       "alg": "Ed25519",
-      "value": "base64:kSBNVTFdRGDGnLjL3EuUHviX-6spVc_XKtxF4-FutzhjQw6aOEMFBICPRSRwHHzpQoQu5B4Muygtre4spB1ADw"
+      "value": "base64:uQjCKaIxmRaNc_gtfJgdlBFUxifwAeTfoo7Lo9m3p4nm3j24dow1sQ8zG7CpmyBi0mm2QZV3okz718IV01TjCw"
     },
     "subject": {
       "commitments": [],
       "kind": "skill",
       "ref": {
         "type": "harness",
-        "uri": "hrn_run_sequence_07365d38a87e_sequence"
+        "uri": "hrn_run_sequence_44136fa355b3_sequence"
       }
     }
   },
-  "receipt_id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+  "receipt_id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
   "registry_provenance": {
     "digest": "sha256:0d9095b508a34f10a9c160140c831c5e0696c3e143b6fadcd9de700f13943405",
     "profile_digest": "sha256:833d9112570b11d5976c7a16e0f903b70d2a87f8b87f8f44b4f3c1cbab938c9d",
@@ -340,7 +277,7 @@
     "trust_tier": "community",
     "version": "0.1.0"
   },
-  "run_id": "run_sequence_07365d38a87e",
+  "run_id": "run_sequence_44136fa355b3",
   "schema": "runx.skill_run.v1",
   "skill_name": "outreach-sequencer",
   "status": "sealed"

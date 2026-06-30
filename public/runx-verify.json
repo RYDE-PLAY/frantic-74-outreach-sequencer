@@ -1,31 +1,25 @@
 {
   "schema": "runx.verify_verdict.v1",
-  "receipt_id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
-  "valid": false,
+  "receipt_id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
+  "valid": true,
   "digest": {
     "status": "valid",
-    "expected": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87",
-    "actual": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87"
+    "expected": "sha256:daee6afb033d31cd7b57b62b2e46071c19dae3114618e6525aa186ccd52b4a33",
+    "actual": "sha256:daee6afb033d31cd7b57b62b2e46071c19dae3114618e6525aa186ccd52b4a33"
   },
   "content_address": {
     "status": "valid",
-    "expected": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
-    "actual": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8"
+    "expected": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
+    "actual": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b"
   },
   "signature": {
-    "mode": "local-development",
-    "status": "invalid",
-    "kid": "runx-demo-key"
+    "mode": "production",
+    "status": "valid",
+    "kid": "outreach-sequencer-repair-20260630"
   },
   "lineage": {
     "status": "unverified",
     "message": "single receipt verification cannot prove receipt-tree lineage"
   },
-  "findings": [
-    {
-      "code": "signature_malformed",
-      "path": "signature.value",
-      "message": "signature value is malformed"
-    }
-  ]
+  "findings": []
 }

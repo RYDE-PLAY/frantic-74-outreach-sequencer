@@ -1,5 +1,5 @@
 {
-  "summary": "Outreach Sequencer is published as ryde-play/outreach-sequencer@0.1.0 with durable engagement-state routing, data-store append evidence, hosted registry install, harness, dogfood, and verification artifacts.",
+  "summary": "Outreach Sequencer is published as ryde-play/outreach-sequencer@0.1.0 with durable engagement-state routing, data-store append evidence, hosted registry install, harness, dogfood, and a production-signed receipt that passes runx verify.",
   "schema": "frantic.outreach_sequencer.evidence.v1",
   "package": {
     "name": "outreach-sequencer",
@@ -27,10 +27,10 @@
   "dogfood": {
     "package": "ryde-play/outreach-sequencer@0.1.0",
     "input": "fixtures/happy-next-touch.json",
-    "command": "runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai",
+    "command": "RUNX_RECEIPT_SIGN_KID=<kid> RUNX_RECEIPT_SIGN_ED25519_SEED_BASE64=<seed> RUNX_RECEIPT_SIGN_ISSUER_TYPE=hosted runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai --receipt-dir <receipts> --json",
     "status": "sealed",
-    "receipt_id": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
-    "receipt_ref": "runx:receipt:sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
+    "receipt_id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
+    "receipt_ref": "runx:receipt:sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
     "decision": {
       "current_touch_index": 2,
       "eligible": true,
@@ -76,31 +76,83 @@
       "happy_next_touch",
       "stop_replied",
       "stop_missing_sequence_definition"
-    ]
+    ],
+    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/runx-receipt.json",
+    "signing": {
+      "mode": "production",
+      "issuer_kid": "outreach-sequencer-repair-20260630",
+      "issuer_type": "hosted",
+      "public_key_base64": "6BJYDNhd5VRnPZmbiYErgWHGcyc72bzS68p9MESTHYA=",
+      "private_key_disclosed": false
+    }
   },
   "verification": {
-    "valid": false,
+    "schema": "runx.verify_verdict.v1",
+    "receipt_id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
+    "valid": true,
     "digest": {
       "status": "valid",
-      "expected": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87",
-      "actual": "sha256:f3f66d6f7aa3218bffe6e26e6ba054e7db856f884c4fad9b1bd772ea801bbf87"
+      "expected": "sha256:daee6afb033d31cd7b57b62b2e46071c19dae3114618e6525aa186ccd52b4a33",
+      "actual": "sha256:daee6afb033d31cd7b57b62b2e46071c19dae3114618e6525aa186ccd52b4a33"
     },
     "content_address": {
       "status": "valid",
-      "expected": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8",
-      "actual": "sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8"
+      "expected": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
+      "actual": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b"
     },
     "signature": {
-      "mode": "local-development",
-      "status": "invalid",
-      "kid": "runx-demo-key"
+      "mode": "production",
+      "status": "valid",
+      "kid": "outreach-sequencer-repair-20260630"
     },
-    "findings": [
-      {
-        "code": "signature_malformed",
-        "path": "signature.value",
-        "message": "signature value is malformed"
-      }
-    ]
+    "lineage": {
+      "status": "unverified",
+      "message": "single receipt verification cannot prove receipt-tree lineage"
+    },
+    "findings": []
+  },
+  "verification_command": "RUNX_RECEIPT_VERIFY_KID=<kid> RUNX_RECEIPT_VERIFY_ED25519_PUBLIC_KEY_BASE64=<public_key_base64> runx verify --receipt runx-receipt.json --json",
+  "verification_public_key": {
+    "kid": "outreach-sequencer-repair-20260630",
+    "public_key_base64": "6BJYDNhd5VRnPZmbiYErgWHGcyc72bzS68p9MESTHYA="
+  },
+  "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/runx-receipt.json",
+  "assertions": [
+    {
+      "id": "hosted-registry-read",
+      "status": "pass",
+      "detail": "runx registry read resolved ryde-play/outreach-sequencer@0.1.0 from https://api.runx.ai"
+    },
+    {
+      "id": "clean-install",
+      "status": "pass",
+      "detail": "runx add ryde-play/outreach-sequencer@0.1.0 succeeded from the hosted registry"
+    },
+    {
+      "id": "hosted-harness",
+      "status": "pass",
+      "detail": "hosted-installed harness passed happy_next_touch, stop_replied, and stop_missing_sequence_definition"
+    },
+    {
+      "id": "dogfood-sealed",
+      "status": "pass",
+      "detail": "registry dogfood run sealed and produced runx:receipt:sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b"
+    },
+    {
+      "id": "verify-production-signature",
+      "status": "pass",
+      "detail": "signature.status=valid; signature.mode=production"
+    },
+    {
+      "id": "no-secret-disclosure",
+      "status": "pass",
+      "detail": "artifacts publish only the verification public key, never the private signing seed"
+    }
+  ],
+  "urls": {
+    "evidence_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/evidence.json",
+    "verification_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/verification.json",
+    "report": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/report.md",
+    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/runx-receipt.json"
   }
 }

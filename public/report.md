@@ -36,7 +36,10 @@ under its own preflight and approval.
   - `stop_missing_sequence_definition`
 - Dogfood command: `runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai`
 - Dogfood result: sealed
-- Receipt ref: `runx:receipt:sha256:a6344a7b401841bcc54d528ecd14d7e7a58a4346270392a8195cdda3956f62c8`
+- Receipt ref: `runx:receipt:sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b`
+- Receipt JSON: `https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/runx-receipt.json`
+- `runx verify`: valid production signature with issuer kid
+  `outreach-sequencer-repair-20260630`
 
 ## Dogfood Observation
 
@@ -48,11 +51,10 @@ emitted a next-touch packet naming `send-as` dispatch by naming.
 
 ## Verify Note
 
-`runx verify --receipt <dogfood receipt> --allow-local-development-signatures
---json` reports valid digest and valid content address for the dogfood receipt,
-but marks the demo-signer signature invalid with `signature_malformed`. The
-exact verdict is published as `verification.json` and `runx-verify.json`. The
-registry package itself was published, read back from the hosted registry,
+`runx verify --receipt runx-receipt.json --json` now passes with a production
+Ed25519 signature. `verification.json` publishes the verification public key and
+the exact verdict; the private signing seed is not included in any artifact.
+The registry package itself was published, read back from the hosted registry,
 installed cleanly, and harness-tested from the installed copy.
 
 ## New User Commands
@@ -60,7 +62,9 @@ installed cleanly, and harness-tested from the installed copy.
 - Install: `runx add ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai`
 - Inspect: `runx registry read ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai --json`
 - Run: `runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai --json`
-- Verify: `runx verify --receipt <receipt.json> --json`
+- Verify: set the `RUNX_RECEIPT_VERIFY_KID` and
+  `RUNX_RECEIPT_VERIFY_ED25519_PUBLIC_KEY_BASE64` values from
+  `verification.json`, then run `runx verify --receipt runx-receipt.json --json`
 
 ## Artifacts
 
@@ -71,4 +75,5 @@ installed cleanly, and harness-tested from the installed copy.
 - `hosted-installed-harness.json`: harness output from the installed package.
 - `registry-dogfood.json`: dogfood run output from the registry ref.
 - `runx-add.json`: clean install output.
+- `runx-receipt.json`: production-signed dogfood receipt.
 - `runx-verify.json`: runx verify verdict for the dogfood receipt.
