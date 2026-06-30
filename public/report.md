@@ -37,7 +37,7 @@ under its own preflight and approval.
 - Dogfood command: `runx skill ryde-play/outreach-sequencer@0.1.0 --registry https://api.runx.ai`
 - Dogfood result: sealed
 - Receipt ref: `runx:receipt:sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b`
-- Receipt JSON: `https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/runx-receipt.json`
+- Receipt JSON: `https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/runx-receipt.json`
 - `runx verify`: valid production signature with issuer kid
   `outreach-sequencer-repair-20260630`
 

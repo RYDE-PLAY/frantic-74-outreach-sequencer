@@ -91,7 +91,7 @@
       "stop_replied",
       "stop_missing_sequence_definition"
     ],
-    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/runx-receipt.json",
+    "receipt_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/runx-receipt.json",
     "signing": {
       "mode": "production",
       "issuer_kid": "outreach-sequencer-repair-20260630",
@@ -104,7 +104,7 @@
     "tool": "RUNX_RECEIPT_VERIFY_KID=<kid> RUNX_RECEIPT_VERIFY_ED25519_PUBLIC_KEY_BASE64=<public_key_base64> runx verify --receipt runx-receipt.json --json",
     "kid": "outreach-sequencer-repair-20260630",
     "public_key_base64": "6BJYDNhd5VRnPZmbiYErgWHGcyc72bzS68p9MESTHYA=",
-    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/runx-receipt.json",
+    "receipt_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/runx-receipt.json",
     "verdict": {
       "schema": "runx.verify_verdict.v1",
       "receipt_id": "sha256:b1946b4127b1e51388376e4dd8ff03990dcc3e1c1850d0e7b8eb2c576756fc9b",
@@ -147,15 +147,15 @@
     "the private signing seed is not included in artifacts; verification uses the published Ed25519 public key only"
   ],
   "public_artifacts": {
-    "evidence_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/evidence.json",
-    "verification_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/verification.json",
-    "report": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/report.md",
-    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/runx-receipt.json"
+    "evidence_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/evidence.json",
+    "verification_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/verification.json",
+    "report": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/report.md",
+    "receipt_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/runx-receipt.json"
   },
   "urls": {
-    "evidence_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/evidence.json",
-    "verification_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/verification.json",
-    "report": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/report.md",
-    "receipt_json": "https://raw.githubusercontent.com/RYDE-PLAY/frantic-74-outreach-sequencer/main/public/runx-receipt.json"
+    "evidence_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/evidence.json",
+    "verification_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/verification.json",
+    "report": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/report.md",
+    "receipt_json": "https://cdn.jsdelivr.net/gh/RYDE-PLAY/frantic-74-outreach-sequencer@main/public/runx-receipt.json"
   }
 }
